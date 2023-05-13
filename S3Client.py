@@ -71,12 +71,22 @@ class S3Client:
 
     # This function lists all the objects in the given S3 bucket.
     def list_s3_objects(self, bucket_name):
-        objects = self.s3_client.list_objects_v2(Bucket=bucket_name)
-        objects_list = objects['Contents']
-        print("Listing all bucket\'s objects:")
-        for idx, obj in enumerate(objects_list):
-            print(f"{idx + 1}. {obj['Key']}")
-        return objects_list
+        try:
+            objects = self.s3_client.list_objects_v2(Bucket=bucket_name)
+        except ClientError as error:
+            print("Error!")
+            print(error, "\n")
+        else:
+            file_count = objects['KeyCount']
+            if file_count == 0:
+                print(f"Bucket: {bucket_name}, is empty!")
+                return []
+            else:
+                objects_list = objects['Contents']
+                print("Listing all bucket\'s objects:")
+                for idx, obj in enumerate(objects_list):
+                    print(f"{idx + 1}. {obj['Key']}")
+                return objects_list
 
     # This function downloads the given file from the given S3 bucket to
     # the specified path.
