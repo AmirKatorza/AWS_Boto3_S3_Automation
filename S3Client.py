@@ -92,7 +92,13 @@ class S3Client:
     # the specified path.
     def download_file_from_s3(self, bucket_name, file_name, download_path):
         local_file_path = os.path.join(download_path, file_name)
-        self.s3_client.download_file(bucket_name, file_name, local_file_path)
+        try:
+            self.s3_client.download_file(bucket_name, file_name, local_file_path)
+        except ClientError as error:
+            print(f"Error Downloading file {file_name}")
+            print(error)
+        else:
+            print(f"{file_name} was downloaded successfully!")
 
     def _user_delete_choice(self):
         while True:
