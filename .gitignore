@@ -1,3 +1,6 @@
 credentials.py
 images/
 downloads/
+__pycache__/
+.idea/
+venv/
