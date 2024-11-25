@@ -21,8 +21,8 @@ This is a Python-based command-line application for interacting with Amazon S3 b
 
 1. Clone the repository:
 ```bash
-git clone https://your-repository-url.git
-cd s3-client-project
+git clone https://github.com/AmirKatorza/AWS_Boto3_S3_Automation.git
+cd AWS_Boto3_S3_Automation
 ```
 
 2. Install required dependencies:
